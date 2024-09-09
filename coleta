@@ -1,0 +1,14 @@
+import requests
+import pandas as pd
+
+def coletar_dados(api_url):
+    resposta = requests.get(api_url)
+    if resposta.status_code == 200:
+        dados = resposta.json()
+        return pd.DataFrame(dados)
+    else:
+        raise Exception(f"Falha ao coletar dados: {resposta.status_code}")
+
+api_url = 'https://api.exemplo.com/incendios'
+dados_incendios = coletar_dados(api_url)
+
